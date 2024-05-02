@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+	let  input, day;
+	do {
+		// Prendre la valeur donnee par l'utilisateur
+	   input = prompt();
+	   if(!isNaN(input) && input>0 && input<=31){
+	   	   input = parseInt(input);
+
+		   switch((input - 1)%7){
+		   	  case 0 : day = "mercredi";
+		   	  	break;
+		   	  case 1 : day = "jeudi";
+		   	  	break;
+		   	  case 2 : day = "vendredi";
+		   	  	break;
+		   	  case 3 : day = "samedi";
+		   	  	break;
+		   	  case 4 : day = "dimanche";
+		   	  	break;
+		   	  case 5 : day = "lundi";
+		   	  	break;
+		   	  case 6 : day = "mardi";
+		   	  	break;
+		   }
+		   console.log(day + " " + input + "mai 2024");
+
+		}
+
+	}
+	while(input>0 && input<=31);
+
+	
+</script>
+</html>
