@@ -74,10 +74,10 @@ let books = [
 ]
 
 /* 
-	1- Afficher les elements du tableau books dans le panier et mettre a jour les informations du panier // 5pts
-	2- Gerer l'ajout et la dimunition de la quatite d'un item dans le pagner							 // 5pts
+	1- Afficher les elements du tableau books dans le panier et mettre a jour les informations du panier 
+	2- Gerer l'ajout et la dimunition de la quatite d'un item dans le pagner							 
 	3- Creer un formulaire permettant d'ajouter un nouveau livre dans le tableau books
-	4- Supprimer un produit du panier					 // 5pts
+	4- Supprimer un produit du panier					 
 	5- Modifier le prix total
 
 
@@ -85,73 +85,6 @@ let books = [
 
 */
 
-function addInputQty() {
-	const inputQty = document.createElement("input")
-	inputQty.type="number"
-	inputQty.min = "0"
-	inputQty.max = "99"
-	inputQty.className="qtyinput"
-	inputQty.value="1"
-	const tdQty =document.createElement("td")
-	tdQty.append(inputQty)
-
-	inputQty.onchange= function(event){
-		const priceNode =event.target.parentElement.nextSibling.nextSibling
-		
-		const idPd = priceNode.parentElement.id
-		//const idPd = priceNode.parentElement.id
-		const currentBook = books.filter(item => item.isbn == idPd )[0]
-		
-		priceNode.innerText = event.target.value * currentBook.price
-
-	}
-
-	return tdQty
-}
-
-function addOneBookInCart(book){
-	const trProduct = document.createElement("tr")
-	trProduct.id=book.isbn
-	trProduct.className = "productitm"
-	const img = document.createElement("img")
-	img.src = "images/"+book.image 
-	img.className = "thumb"
-	const tdImg =document.createElement("td")
-	tdImg.append(img)
-	trProduct.append(tdImg)
-
-	trProduct.append(addInputQty())
-	
-
-
-	const tdPdTitle =document.createElement("td")
-	const nodePdTitle = document.createTextNode(book.title)
-	tdPdTitle.append(nodePdTitle)
-	trProduct.append(tdPdTitle)
-
-	const tdPdPrice =document.createElement("td")
-	const nodePdPrice = document.createTextNode(book.price)
-	tdPdPrice.append(nodePdPrice)
-	trProduct.append(tdPdPrice)
-
-
-	tbody.prepend(trProduct)
-}
-// 1
-const  tbodies = document.getElementsByTagName("tbody")
-
-const tbody = tbodies[0]
-
-books.map(book=>addOneBookInCart(book))
-
-
-function getTotalPriceIncart(){
-	let trCommandLines = document.getElementsByClassName("productitm");
-	let totaPrice = 0
-	(Array.from(trCommandLines)).map(item =>(totaPrice = totaPrice + Number.parseInt(item.lastChild.innerText)))
-	return totaPrice;
-}
-console.log(getTotalPriceIncart())
 
 
 
