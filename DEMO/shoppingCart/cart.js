@@ -86,6 +86,17 @@ let books = [
 */
 
 
-
+const tBody = document.getElementsByTagName('tbody')[0];
+books.map( book =>  {
+			let tr = document.createElement('tr');
+			let firstTd = document.createElement('td');
+			let img = document.createElement('img');
+			img.src = `img/${book.image}`;
+			img.alt = book.image;
+			firstTd.append(img);
+			tr.append(firstTd);
+			tBody.prepend(tr);
+		}
+	)
 
 
