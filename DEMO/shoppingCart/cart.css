@@ -1,3 +1,11 @@
 img {
 	height: 50px;
 }
+
+td.title {
+	text-transform: uppercase;
+}
+
+td.price {
+	font-weight: bold;
+}

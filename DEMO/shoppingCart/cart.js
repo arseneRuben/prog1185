@@ -87,15 +87,17 @@ let books = [
 
 
 const tBody = document.getElementsByTagName('tbody')[0];
+let = totalPrice = 0;
 books.map(book => {
 	let tr = document.createElement('tr');
+
 	let firstTd = document.createElement('td');
 	let img = document.createElement('img');
 	img.src = `img/${book.image}`;
 	img.alt = book.image;
 	firstTd.append(img);
 	tr.append(firstTd);
-	tBody.prepend(tr);
+	
 
 	let qtyTd = document.createElement('td');
 	let inputElement = document.createElement('input');
@@ -103,10 +105,12 @@ books.map(book => {
 	inputElement.value=1;
 	inputElement.max = book.stock;
 	inputElement.type= 'number';
+	inputElement.className = 'form-control'
 	qtyTd.append(inputElement);
 	tr.append(qtyTd);
 
 	let titleTd = document.createElement('td');
+	titleTd.className = "title"
 	titleTd.textContent = book.title;
 	tr.append(titleTd);
 
@@ -116,9 +120,33 @@ books.map(book => {
 
 	let totalTd = document.createElement('td');
 	totalTd.textContent = `$${book.price}`;
+	totalTd.className="price"
 	tr.appendChild(totalTd);
+	let price = parseInt(totalTd.textContent.slice(1, totalTd.textContent.length))
+	if(isNaN(price)){
+	} else {
+		totalPrice += price;
+	}
+	console.log(totalPrice)
+	
+	
+
+	let actionTd = document.createElement('td');
+	let icon = document.createElement('i');
+	icon.className='fa fa-trash';
+
+	actionTd.append(icon);
+	tr.appendChild(actionTd);
+
+	tBody.prepend(tr);
+
+
+	let spanTotalPrice = document.getElementsByClassName("thick")[0]
+	spanTotalPrice.textContent = `$${totalPrice}`;
 }
 )
+
+
 
 
 
