@@ -93,8 +93,10 @@ books.map(book => {
 
 	let firstTd = document.createElement('td');
 	let img = document.createElement('img');
+	
 	img.src = `img/${book.image}`;
 	img.alt = book.image;
+	img.addEventListener("click",showMessage);
 	firstTd.append(img);
 	tr.append(firstTd);
 	
@@ -123,21 +125,15 @@ books.map(book => {
 	totalTd.className="price"
 	tr.appendChild(totalTd);
 	let price = parseInt(totalTd.textContent.slice(1, totalTd.textContent.length))
-	if(isNaN(price)){
-	} else {
+	if(!isNaN(price)){
 		totalPrice += price;
-	}
-	console.log(totalPrice)
-	
-	
-
+	} 
 	let actionTd = document.createElement('td');
 	let icon = document.createElement('i');
 	icon.className='fa fa-trash';
 
 	actionTd.append(icon);
 	tr.appendChild(actionTd);
-
 	tBody.prepend(tr);
 
 
@@ -150,3 +146,6 @@ books.map(book => {
 
 
 
+function showMessage(){
+	console.log("Interessant");
+}
