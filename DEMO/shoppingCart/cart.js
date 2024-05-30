@@ -113,6 +113,7 @@ books.map(book => {
 	inputElement.type= 'number';
 	inputElement.className = 'form-control'
 	qtyTd.append(inputElement);
+	qtyTd.className="qty"
 	tr.append(qtyTd);
 
 	let titleTd = document.createElement('td');
@@ -160,6 +161,27 @@ function updateLinePrice(event){
 	const tdPrice = tr.getElementsByClassName('price')[0];
 	const tdTotal = tr.getElementsByClassName('total_partial')[0];
 	tdTotal.textContent = tdPrice.textContent.split("$")[1]*qty;
-
+	updateTotal()
 }
 
+
+function updateTotal(){
+		let total = 0;
+		const trs = tBody.getElementsByTagName("tr");
+		Array.from(trs).map((tr, index) => {
+			if(index < trs.length-2 ){
+					
+			
+				const price = tr.getElementsByClassName('price')[0].textContent.split("$")[1];
+				const tdQty = tr.getElementsByClassName('qty')[0];
+				const inputQty = tdQty.getElementsByTagName("input")[0];
+				const  qty = inputQty.value;
+				
+				total += price*qty;		
+				
+			}
+		});
+
+		document.getElementsByClassName("thick")[0].textContent = `$${total}`;
+
+}
