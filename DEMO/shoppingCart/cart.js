@@ -90,21 +90,25 @@ const tBody = document.getElementsByTagName('tbody')[0];
 let = totalPrice = 0;
 books.map(book => {
 	let tr = document.createElement('tr');
-
+	tr.id = book.isbn
+	// premiere colonne
 	let firstTd = document.createElement('td');
 	let img = document.createElement('img');
-	
 	img.src = `img/${book.image}`;
 	img.alt = book.image;
-	img.addEventListener("click",showMessage);
+	
 	firstTd.append(img);
 	tr.append(firstTd);
 	
+	// deuxieme colone
 
 	let qtyTd = document.createElement('td');
 	let inputElement = document.createElement('input');
+	inputElement.addEventListener("change", updateLinePrice);
+
 	inputElement.min=0;
 	inputElement.value=1;
+	inputElement.id = `input_${book.isbn}`;
 	inputElement.max = book.stock;
 	inputElement.type= 'number';
 	inputElement.className = 'form-control'
@@ -118,11 +122,12 @@ books.map(book => {
 
 	let priceTd = document.createElement('td');
 	priceTd.textContent = `$${book.price}`;
+	priceTd.className="price"
 	tr.append(priceTd);
 
 	let totalTd = document.createElement('td');
 	totalTd.textContent = `$${book.price}`;
-	totalTd.className="price"
+	totalTd.className="total_partial"
 	tr.appendChild(totalTd);
 	let price = parseInt(totalTd.textContent.slice(1, totalTd.textContent.length))
 	if(!isNaN(price)){
@@ -146,6 +151,15 @@ books.map(book => {
 
 
 
-function showMessage(){
-	console.log("Interessant");
+function updateLinePrice(event){
+	let inputId = event.target.id;
+	let trId = inputId.split("_")[1]
+	let qty = event.target.value;
+	const tr = document.getElementById(trId);
+	
+	const tdPrice = tr.getElementsByClassName('price')[0];
+	const tdTotal = tr.getElementsByClassName('total_partial')[0];
+	tdTotal.textContent = tdPrice.textContent.split("$")[1]*qty;
+
 }
+
