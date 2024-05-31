@@ -86,7 +86,11 @@ let books = [
 */
 
 
+
 const tBody = document.getElementsByTagName('tbody')[0];
+let tdShipping = document.getElementsByClassName("shipping")[0];
+let tdTtc= document.getElementsByClassName("ttc")[0];
+
 let = totalPrice = 0;
 books.map(book => {
 	let tr = document.createElement('tr');
@@ -96,6 +100,7 @@ books.map(book => {
 	let img = document.createElement('img');
 	img.src = `img/${book.image}`;
 	img.alt = book.image;
+	img.className=`img_${book.isbn}`;
 	
 	firstTd.append(img);
 	tr.append(firstTd);
@@ -146,7 +151,7 @@ books.map(book => {
 	let spanTotalPrice = document.getElementsByClassName("thick")[0]
 	spanTotalPrice.textContent = `$${totalPrice}`;
 }
-)
+);
 
 
 
@@ -169,6 +174,7 @@ function updateTotal(){
 		let total = 0;
 		const trs = tBody.getElementsByTagName("tr");
 		Array.from(trs).map((tr, index) => {
+
 			if(index < trs.length-2 ){
 					
 			
@@ -183,5 +189,7 @@ function updateTotal(){
 		});
 
 		document.getElementsByClassName("thick")[0].textContent = `$${total}`;
+		tdShipping.textContent = `$${total/100}`
+		tdTtc.textContent = `$${total*(1+1/100)}`
 
 }
