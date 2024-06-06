@@ -142,6 +142,8 @@ books.map(book => {
 	let actionTd = document.createElement('td');
 	let icon = document.createElement('i');
 	icon.className='fa fa-trash';
+	icon.addEventListener("click", dropLine);
+
 
 	actionTd.append(icon);
 	tr.appendChild(actionTd);
@@ -154,6 +156,10 @@ books.map(book => {
 );
 
 
+function dropLine(event) {
+	event.target.parentElement.parentElement.remove()
+	updateTotal()
+}
 
 
 
